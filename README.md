@@ -6,7 +6,7 @@ A single-cycle RISC-V processor implemented in Verilog, synthesized on an Intel 
 
 ## System Architecture
 
-![System Diagram](Image/cpu_ricsv_sgc.png)
+![System Diagram](Image/cpu_ricsv_sgc.jpg)
 
 ---
 
@@ -92,4 +92,4 @@ CPU_RICSV/
 ## Reference
 
 - [The RISC-V Instruction Set Manual](https://riscv.org/technical/specifications/)
-- Course material: `Image/cpu_ricsv_sgc.pdf`
+- Course material: `Image/cpu_ricsv_sgc.jpg`
