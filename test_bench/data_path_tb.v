@@ -4,7 +4,7 @@ module data_path_tb();
         // Tín hiệu kết nối DUT
         // --------------------------------------------------------
      reg        clk, reset;
-     reg        pc_sel;
+     reg [1:0]  pc_sel;
      reg        reg_we;
      reg [2:0]  imm_sel;
      reg        BrUn;
@@ -13,6 +13,7 @@ module data_path_tb();
      reg [3:0]  alu_control;
      reg        mem_we;
      reg [1:0]  rw_type;
+     reg        ld_unsigned = 0;
      reg [1:0]  wb_sel;
 
      wire [31:0] instr;
@@ -35,6 +36,7 @@ module data_path_tb();
             .alu_control(alu_control),
             .mem_we     (mem_we),
             .rw_type    (rw_type),
+            .ld_unsigned(ld_unsigned),
             .wb_sel     (wb_sel),
             .clk        (clk),
             .reset      (reset),
@@ -120,7 +122,7 @@ module data_path_tb();
 			mem_we = 0;
 			wb_sel = 2'b01;
 			#1
-			pc_sel = beq;
+			pc_sel = beq ? 2'b01 : 2'b00;
 			#9;
 			// ADD tại PC=16 bị bỏ qua do BEQ branch taken → xóa chu kỳ ADD
 			//////////////////////
@@ -138,6 +140,17 @@ module data_path_tb();
 			rw_type = 2'b00;
 			wb_sel = 2'b01;
 			#10;
+			//////////////////////
+			// CHECK
+			//////////////////////
+			if (dut.rf.mem_reg[1] == 32'd5) $display("PASS x1 = 5");
+			else $display("FAIL x1 = %0d (expect 5)", dut.rf.mem_reg[1]);
+			if (dut.rf.mem_reg[2] == 32'd5) $display("PASS x2 = 5");
+			else $display("FAIL x2 = %0d (expect 5)", dut.rf.mem_reg[2]);
+			if (dut.rf.mem_reg[3] == 32'd0) $display("PASS x3 = 0");
+			else $display("FAIL x3 = %0d (expect 0)", dut.rf.mem_reg[3]);
+			if (dut.dm.mem[0] == 8'd5) $display("PASS MEM[0] = 5");
+			else $display("FAIL MEM[0] = %0d (expect 5)", dut.dm.mem[0]);
 			$finish;
 		 end
   

@@ -3,9 +3,10 @@ input [31:0]PC;
 input reset;
 output [31:0]instruction_code;
 
-reg [7:0]Memory[63:0];
-assign instruction_code = {Memory[PC[5:0]+3], Memory[PC[5:0]+2],
-                              Memory[PC[5:0]+1], Memory[PC[5:0]]};
+reg [7:0]Memory[127:0];
+wire [6:0]pc_word = {PC[6:2], 2'b00};//align to word, max 124 so +3 never overflows
+assign instruction_code = {Memory[pc_word+6'd3], Memory[pc_word+6'd2],
+                              Memory[pc_word+6'd1], Memory[pc_word]};
 
 always@(reset)begin
 	if(reset ==1)begin

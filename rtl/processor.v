@@ -15,6 +15,7 @@ wire a_sel;
 wire [3:0]alu_control;
 wire mem_we;
 wire [1:0]rw_type;
+wire ld_unsigned;
 wire [1:0]wb_sel;
 
 
@@ -30,6 +31,7 @@ data_path dp(.pc_sel(pc_sel),
 				 .alu_control(alu_control),
 				 .mem_we(mem_we),
 				 .rw_type(rw_type),
+				 .ld_unsigned(ld_unsigned),
 				 .wb_sel(wb_sel),
 				 .clk(clk),
 				 .reset(reset),
@@ -47,6 +49,7 @@ controller con(.instr(instr),
 					.mem_we(mem_we),
 					.wb_sel(wb_sel),
 					.rw_type(rw_type),
-					.BrUn(BrUn));
+					.BrUn(BrUn),
+					.ld_unsigned(ld_unsigned));
 
 endmodule

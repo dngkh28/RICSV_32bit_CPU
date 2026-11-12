@@ -1,6 +1,6 @@
 # ERROR: No extended dataflow license exists
 # vsim processor_tb 
-# Start time: 17:08:46 on Jun 21,2026
+# Start time: 15:25:14 on Jul 28,2026
 # Loading work.processor_tb
 # Loading work.processor
 # Loading work.data_path
@@ -16,8 +16,15 @@
 # Loading work.controller
 add wave *
 add wave -position insertpoint  \
+sim:/processor_tb/a/dp/ifu/pc_current
+add wave -position insertpoint  \
+sim:/processor_tb/a/dp/ifu/pc_next
+add wave -position insertpoint  \
 sim:/processor_tb/a/dp/ifu/PC
 add wave -position insertpoint  \
+{sim:/processor_tb/a/dp/rf/mem_reg[7]} \
+{sim:/processor_tb/a/dp/rf/mem_reg[6]} \
+{sim:/processor_tb/a/dp/rf/mem_reg[5]} \
 {sim:/processor_tb/a/dp/rf/mem_reg[4]} \
 {sim:/processor_tb/a/dp/rf/mem_reg[3]} \
 {sim:/processor_tb/a/dp/rf/mem_reg[2]} \
@@ -29,7 +36,7 @@ add wave -position insertpoint  \
 {sim:/processor_tb/a/dp/dm/mem[2]} \
 {sim:/processor_tb/a/dp/dm/mem[3]} \
 {sim:/processor_tb/a/dp/dm/mem[4]}
-run 150ns
+run 200ns
 # t=20000 ns | PC=0 | zero=0
 # t=30000 ns | PC=4 | zero=1
 # t=40000 ns | PC=8 | zero=1
@@ -46,27 +53,5 @@ run 150ns
 #    Time: 140 ns  Iteration: 0  Instance: /processor_tb
 # 1
 # Break in Module processor_tb at processor_tb.v line 22
-add wave -position insertpoint  \
-{sim:/processor_tb/a/dp/rf/mem_reg[7]} \
-{sim:/processor_tb/a/dp/rf/mem_reg[6]} \
-{sim:/processor_tb/a/dp/rf/mem_reg[5]}
-restart -f
-run 180ns
-# t=20000 ns | PC=0 | zero=0
-# t=30000 ns | PC=4 | zero=1
-# t=40000 ns | PC=8 | zero=1
-# t=50000 ns | PC=12 | zero=0
-# t=60000 ns | PC=20 | zero=1
-# t=70000 ns | PC=24 | zero=1
-# t=80000 ns | PC=28 | zero=0
-# t=90000 ns | PC=36 | zero=0
-# t=100000 ns | PC=40 | zero=0
-# t=110000 ns | PC=32 | zero=1
-# t=120000 ns | PC=36 | zero=0
-# t=130000 ns | PC=40 | zero=0
-# ** Note: $finish    : processor_tb.v(22)
-#    Time: 140 ns  Iteration: 0  Instance: /processor_tb
-# 1
-# Break in Module processor_tb at processor_tb.v line 22
-# End time: 17:49:48 on Jun 21,2026, Elapsed time: 0:41:02
+# End time: 16:05:33 on Jul 28,2026, Elapsed time: 0:40:19
 # Errors: 0, Warnings: 0

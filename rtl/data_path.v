@@ -19,6 +19,7 @@ input [3:0]alu_control,
 //data_mem
 input mem_we,
 input [1:0]rw_type,
+input ld_unsigned,
 //muxWB
 input [1:0]wb_sel,
 input clk,
@@ -66,7 +67,7 @@ reg_file rf(.rs1(instr_wire[19:15]),
 				.read_data1(read_data1),
 				.read_data2(read_data2)
 				);
-IMM_GEN geni(.instr(instr_wire),
+IMM_GEN geni(.instr(instr_wire[31:7]),
 				 .imm_sel(imm_sel),
 				 .imm_out(imm_out)
 				);
@@ -103,6 +104,7 @@ data_mem dm(.addr(alu_result[6:0]),
 			.w_data(read_data2),
 			.reset(reset),
 			.rw_type(rw_type),
+			.ld_unsigned(ld_unsigned),
 			.clk(clk),
 			.r_data(r_data)
 		);

@@ -7,6 +7,7 @@ reg         mem_we;
 reg  [31:0] w_data;
 reg         reset;
 reg  [1:0]  rw_type;
+reg         ld_unsigned = 0;
 reg         clk;
 
 wire [31:0] r_data;
@@ -22,6 +23,7 @@ data_mem dut(
     .w_data(w_data),
     .reset(reset),
     .rw_type(rw_type),
+    .ld_unsigned(ld_unsigned),
     .clk(clk),
     .r_data(r_data)
 );

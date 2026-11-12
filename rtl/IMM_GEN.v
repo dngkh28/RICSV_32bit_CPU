@@ -1,5 +1,5 @@
 module IMM_GEN(
-input [31:0]instr,//instruction from 0->31
+input [31:7]instr,//instruction from 0->31
 input [2:0]imm_sel,
 output reg [31:0]imm_out
 );
@@ -16,6 +16,7 @@ always @(*)begin
                              instr[30:25], instr[11:8], 1'b0};
 		J_TYPE: imm_out = {{12{instr[31]}}, instr[19:12], 
 									  instr[20], instr[30:21],1'b0};
+		U_TYPE: imm_out ={instr[31:12], 12'b0 };
 
 
 		default:

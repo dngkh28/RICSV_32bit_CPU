@@ -4,6 +4,7 @@ input mem_we,
 input [31:0] w_data,
 input reset,
 input [1:0] rw_type,
+input ld_unsigned,//0 : sign extend, 1 : zero extend
 input clk,
 output reg [31:0] r_data
 );
@@ -15,15 +16,17 @@ reg [7:0] mem [0:127];
 always @(*) begin
     case(rw_type)
 
-        // LB
+        // LB, LBU
         2'b00:
-            r_data = {{24{mem[addr][7]}}, mem[addr]};
+            r_data = ld_unsigned ? {24'b0, mem[addr]}
+                                 : {{24{mem[addr][7]}}, mem[addr]};
 
-        // LH
+        // LH, LHU
         2'b01:
-            r_data = {{16{mem[addr+1][7]}},
-                      mem[addr+1],
-                      mem[addr]};
+            r_data = ld_unsigned ? {16'b0, mem[addr+1], mem[addr]}
+                                 : {{16{mem[addr+1][7]}},
+                                    mem[addr+1],
+                                    mem[addr]};
 
         // LW
         2'b10:
